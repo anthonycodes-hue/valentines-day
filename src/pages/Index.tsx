@@ -26,7 +26,7 @@ const Index = () => {
   return (
     <div className="relative min-h-screen bg-background flex flex-col items-center justify-center overflow-hidden">
       <BackgroundMusic />
-      {/* Ambient glow */}
+      {/* Ambient glows */}
       <div
         className="absolute inset-0 z-0"
         style={{
