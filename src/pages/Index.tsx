@@ -2,6 +2,7 @@ import FallingPetals from "@/components/FallingPetals";
 import Rose from "@/components/Rose";
 import Heart from "@/components/Heart";
 import LoveMessage from "@/components/LoveMessage";
+import BackgroundMusic from "@/components/BackgroundMusic";
 
 const roses = [
   { x: 10, delay: 0, scale: 0.7 },
@@ -24,6 +25,7 @@ const hearts = [
 const Index = () => {
   return (
     <div className="relative min-h-screen bg-background flex flex-col items-center justify-center overflow-hidden">
+      <BackgroundMusic />
       {/* Ambient glow */}
       <div
         className="absolute inset-0 z-0"

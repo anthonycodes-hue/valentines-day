@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { Heart } from "lucide-react";
 
 const LoveMessage = () => {
+  const navigate = useNavigate();
   return (
     <motion.div
       className="relative z-20 text-center px-6"
@@ -54,6 +57,22 @@ const LoveMessage = () => {
       >
         You are the best thing that ever happened to me ✨
       </motion.p>
+
+      <motion.button
+        onClick={() => navigate("/letter")}
+        className="mt-10 px-8 py-3 rounded-full font-display text-lg border border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 flex items-center gap-2 mx-auto"
+        style={{
+          boxShadow: "0 0 20px hsl(345 80% 55% / 0.2)",
+        }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 5, duration: 1 }}
+        whileHover={{ scale: 1.05, boxShadow: "0 0 30px hsl(345 80% 55% / 0.4)" }}
+        whileTap={{ scale: 0.97 }}
+      >
+        <Heart className="w-5 h-5" />
+        Read My Letter
+      </motion.button>
     </motion.div>
   );
 };
