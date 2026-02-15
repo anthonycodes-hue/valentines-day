@@ -6,16 +6,26 @@ const MUSIC_URL = "https://cdn.pixabay.com/audio/2024/11/28/audio_fda623ff7a.mp3
 const BackgroundMusic = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
-  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     const audio = new Audio(MUSIC_URL);
     audio.loop = true;
     audio.volume = 0.4;
     audioRef.current = audio;
+
+    // Autoplay on first user interaction (click/touch anywhere)
+    const tryPlay = () => {
+      audio.play().then(() => setPlaying(true)).catch(() => {});
+    };
+    tryPlay();
+    document.addEventListener("click", tryPlay, { once: true });
+    document.addEventListener("touchstart", tryPlay, { once: true });
+
     return () => {
       audio.pause();
       audio.src = "";
+      document.removeEventListener("click", tryPlay);
+      document.removeEventListener("touchstart", tryPlay);
     };
   }, []);
 
@@ -26,28 +36,9 @@ const BackgroundMusic = () => {
       audio.pause();
       setPlaying(false);
     } else {
-      audio.play().then(() => {
-        setPlaying(true);
-        setStarted(true);
-      });
+      audio.play().then(() => setPlaying(true));
     }
   }, [playing]);
-
-  // Show a big "tap to play" overlay initially
-  if (!started) {
-    return (
-      <button
-        onClick={toggle}
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-sm cursor-pointer"
-      >
-        <div className="text-center animate-pulse">
-          <span className="text-5xl mb-4 block">🎵</span>
-          <p className="font-script text-3xl text-primary">Tap to begin</p>
-          <p className="text-muted-foreground text-sm mt-2">with music 💕</p>
-        </div>
-      </button>
-    );
-  }
 
   return (
     <button
