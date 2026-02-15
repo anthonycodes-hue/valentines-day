@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
-const MUSIC_URL = "https://cdn.pixabay.com/audio/2024/11/28/audio_fda623ff7a.mp3";
+const MUSIC_URL = "/public_music_bg-music.mp3";
 
 const BackgroundMusic = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -15,7 +15,7 @@ const BackgroundMusic = () => {
 
     // Autoplay on first user interaction (click/touch anywhere)
     const tryPlay = () => {
-      audio.play().then(() => setPlaying(true)).catch(() => {});
+      audio.play().then(() => setPlaying(true)).catch(() => { });
     };
     tryPlay();
     document.addEventListener("click", tryPlay, { once: true });
